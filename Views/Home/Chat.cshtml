@@ -1,0 +1,200 @@
+﻿
+@{
+    ViewData["Title"] = "Chat";
+}
+    <style>
+        *{
+            box-sizing:border-box;
+        }
+        body{
+            margin:0;
+            height:100vh;
+            width:100wh;
+            display:flex;
+            flex-direction: column;
+        }
+        .navbar{
+            background-color:maroon;
+            min-height: 50px;
+            z-index: 100;
+            box-shadow: 1px 0 2px 0 #740606;
+        }
+        .main {
+            background-color: bisque;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: row;
+            
+        }
+
+        .side-menu {
+            background-color: darkred;
+            min-width: 100px;
+            z-index: 50;
+            box-shadow: 1px 0 2px 0 #740606;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat {
+            background-color: bisque;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            max-height:100%;
+        }
+
+        .room-button {
+            border: 1px solid #000000;
+            color: aliceblue;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0.5rem 1rem 0;
+            height: 68px; 
+            border-radius: 5px;
+            box-shadow: 0 1px 3px 1px #2e0606;
+            background-color: brown;
+        }
+
+            .room-button:hover {
+                box-shadow: 0 2px 3px 1px brown;
+            }
+
+        .chat-body{
+            background-color:bisque;
+            flex-grow: 1;
+            width:900px;
+            flex-direction: column;
+            /*justify-content: flex-end;*/
+            padding-bottom: 1rem;
+            overflow:auto;
+        }
+        
+        .message{
+            display: flex;
+            flex-direction: row;
+            margin-top: 2rem;
+        }
+        .message:first-child{
+            margin-top:auto;
+        }
+        .message> *{
+            padding: 0.2rem;
+        }
+        .message>header{
+            font-weight:bold;
+            min-width: 100px;
+            text-align:right;
+        }
+        .message>p{
+            margin:0;
+            flex-grow:5;
+        }
+        .message>footer{
+             min-width:60px;
+             text-align: center;
+        }
+        .chat-input{
+            background-color:darkred;
+            min-height:80px;
+             min-height:80px;
+            z-index: 100;
+            box-shadow: 0 -1px 2px 0 maroon;
+            display: flex;
+            flex-direction: row;
+            padding: 1rem;
+        }
+        .chat-input>input{
+            flex-grow: 2;
+        }
+        .chat-input>#sendButton{
+            flex-grow: 1;
+        }
+    </style>
+
+    <body>
+        <div class="navbar">
+            <div class="row">
+                <div class="col-md-3">
+                    <h1>@ViewData["Title"]</h1>
+                </div>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <div class="col-md-9">
+                        <b style="color:white">Type your name :</b> <input type="text" id="userInput" />
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-9">
+                        <input type="hidden" id="userInput" value="Admin" />
+                    </div>
+                }
+            </div>
+            
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="main">
+            <div class="side-menu">
+                <div class="room-button">
+                    <a asp-action="Index">Home</a>
+                </div>
+            </div>
+            <div class="chat">
+
+                <div class="chat-body">
+                    <div class="message">
+                        <header id="messagesList"></header>
+                       
+                    </div>
+
+                </div>
+                <div class="row">&nbsp;</div>
+                <div class="chat-input">
+                    
+                    <input type="text" id="messageInput" />
+                    <input type="button" id="sendButton" value="Send Message" />
+                </div>
+            </div>
+        </div>
+        <script src="~/js/signalr/dist/browser/signalr.js"></script>
+        <script src="~/js/chat.js"></script>
+    </body>
+
+@*<h1>@ViewData["Title"]</h1>
+<p>Use this page to chat with other users</p>
+<div class="container">
+    <div class="row">&nbsp;</div>
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <div class="row">
+            <div class="col-2">User</div>
+            <div class="col-4"><input type="text" id="userInput" /></div>
+        </div>
+    }
+        <div class="row">
+            <div class="col-2">Message</div>
+            <div class="col-4"><input type="text" id="messageInput" /></div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-6">
+                <input type="button" id="sendButton" value="Send Message" />
+            </div>
+        </div>
+    </div>
+<div class="row">
+    <div class="col-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <ul id="messagesList"></ul>
+    </div>
+</div>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>*@
+

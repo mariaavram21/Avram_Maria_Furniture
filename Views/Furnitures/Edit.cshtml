@@ -1,0 +1,69 @@
+﻿@model Avram_Maria_Furniture.Models.Furniture
+
+@{
+    ViewData["Title"] = "Edit";
+}
+    <style>
+        body {
+            background-color:antiquewhite;
+            color: white;
+        }
+
+        input {
+            border-radius: 3px;
+        }
+        label{
+            font-weight:bold;
+        }
+    </style>
+
+<h1>Edit</h1>
+
+<h4>Furniture</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Color" class="control-label"></label>
+                <input asp-for="Color" class="form-control" />
+                <span asp-validation-for="Color" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8 col-md-offset-2">
+        <section>
+            <h4>We love our work.</h4>
+            <hr />
+            <img src="~/img/mobila8.jpg" alt="Sample Photo" height="600" width="900" />
+        </section>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

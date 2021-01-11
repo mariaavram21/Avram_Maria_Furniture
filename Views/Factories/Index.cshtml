@@ -1,0 +1,140 @@
+﻿@*@model IEnumerable<Avram_Maria_Furniture.Models.Factory>*@
+@model Avram_Maria_Furniture.Models.FurnitureStoreViewModels.FactoryIndexData
+
+@{
+    ViewData["Title"] = "Factories";
+}
+    <style>
+        body {
+            background-color:papayawhip;
+        }
+    </style>
+
+<h1>Factories</h1>
+
+<p>
+    <img src="~/img/mobila.jpg" alt="img" height="300" width="1200" />
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-action="Create">Create New</a>
+    }
+
+</p>
+<table class="table">
+    <thead>
+        <tr style="background-color: firebrick">
+            <th>FactoryName</th>
+            <th>Address</th>
+            <th>Manufacured Furnitures</th>
+            <th>Furniture Produced</th>
+            @if (User.Identity.IsAuthenticated)
+            {<th>Actions</th> }
+            </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Factories)
+        {
+            string selectedRow = "";
+            if (item.ID == (int?)ViewData["FactoryID"])
+            {
+                selectedRow = "success";
+            }
+        <tr class="@selectedRow">
+            <td>
+                @Html.DisplayFor(modelItem => item.FactoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+
+            <td>
+                @{
+                    foreach (var furniture in item.ManufacturedFurniture)
+                    {
+                        @furniture.Furniture.ID @: @furniture.Furniture.Title <br />
+                    }
+                }
+            </td>
+            <td><a asp-action="Index" asp-route-id="@item.ID">Select</a></td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            }
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+@if (Model.Furnitures != null)
+{
+    <h3>Manufactured Furnitures by Selected Factory</h3>
+    <table class="table">
+        <tr style="background-color: firebrick">
+            <th></th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Color</th>
+            <th>Price</th>
+        </tr>
+        @foreach (var item in Model.Furnitures)
+        {
+            string selectedRow = "";
+            if (item.ID == (int?)ViewData["FurnitureID"])
+            {
+                selectedRow = "success";
+            }
+    <tr class="@selectedRow">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <td>
+                @Html.ActionLink("Select", "Index", new { furnitureID = item.ID })
+            </td>
+        }else { 
+        <td></td>
+        }
+        <td>
+            @item.Title
+        </td>
+        <td>
+            @item.Description
+        </td>
+        <td>
+            @item.Color
+        </td>
+        <td>
+            @item.Price
+        </td>
+    </tr>
+        }
+    </table>
+    <br />
+}
+
+@if (Model.Orders != null)
+{
+    <h3>
+        Customers that have ordered the Selected Furniture
+    </h3>
+    <table class="table">
+        <tr style="background-color: firebrick">
+            <th>Name</th>
+            <th>Order Date</th>
+        </tr>
+        @foreach (var item in Model.Orders)
+        {
+            <tr>
+                <td>
+                    @item.Customer.Name
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+            </tr>
+        }
+    </table>
+}
