@@ -6,10 +6,22 @@ connection.on("ReceiveMessage", function (user, message, date) {
     //console.log(user, message);
     var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g,
         "&gt;");
-    var encodedMsg = user + ": " + msg + " " + date;
+    //var encodedMsg = user + ": " + msg + " " + date;
+    //var li = document.createElement("p");
+    //li.textContent = encodedMsg;
+    //document.getElementById("messagesList").appendChild(li);
+    var encodedMsg =  msg ;
     var li = document.createElement("p");
     li.textContent = encodedMsg;
     document.getElementById("messagesList").appendChild(li);
+    var encodedMsgUser = user + ": ";
+    var li = document.createElement("p");
+    li.textContent = encodedMsgUser;
+    document.getElementById("messagesUser").appendChild(li);
+    var encodedMsgDate =  date;
+    var li = document.createElement("p");
+    li.textContent = encodedMsgDate;
+    document.getElementById("messagesDate").appendChild(li);
 });
 //connection.on("ReceiveUser", function (user) {
     
